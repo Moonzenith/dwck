@@ -1,0 +1,60 @@
+{
+  "resource": "/items",
+  "path": "/items",
+  "httpMethod": "GET",
+  "headers": {
+    "Accept": "application/json",
+    "Host": "api.example.com",
+    "User-Agent": "dwck-synthetic-example/1.0",
+    "X-Forwarded-For": "192.0.2.10",
+    "X-Forwarded-Proto": "https"
+  },
+  "multiValueHeaders": {
+    "Accept": ["application/json"],
+    "Host": ["api.example.com"],
+    "User-Agent": ["dwck-synthetic-example/1.0"],
+    "X-Forwarded-For": ["192.0.2.10"],
+    "X-Forwarded-Proto": ["https"]
+  },
+  "queryStringParameters": {
+    "id": "demo-item",
+    "name": "Example User"
+  },
+  "multiValueQueryStringParameters": {
+    "id": ["demo-item", "another-demo-item"],
+    "name": ["Example User"]
+  },
+  "pathParameters": null,
+  "stageVariables": null,
+  "requestContext": {
+    "resourceId": "example-resource",
+    "resourcePath": "/items",
+    "httpMethod": "GET",
+    "requestTime": "01/Jan/2026:00:00:00 +0000",
+    "path": "/dev/items",
+    "accountId": "000000000000",
+    "protocol": "HTTP/1.1",
+    "stage": "dev",
+    "domainPrefix": "api",
+    "requestTimeEpoch": 1767225600000,
+    "requestId": "example-request",
+    "identity": {
+      "cognitoIdentityPoolId": null,
+      "accountId": null,
+      "cognitoIdentityId": null,
+      "caller": null,
+      "sourceIp": "192.0.2.10",
+      "principalOrgId": null,
+      "accessKey": null,
+      "cognitoAuthenticationType": null,
+      "cognitoAuthenticationProvider": null,
+      "userArn": null,
+      "userAgent": "dwck-synthetic-example/1.0",
+      "user": null
+    },
+    "domainName": "api.example.com",
+    "apiId": "example-api"
+  },
+  "body": null,
+  "isBase64Encoded": false
+}
