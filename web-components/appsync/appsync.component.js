@@ -1,6 +1,6 @@
 const { Amplify, API, graphqlOperation } = require('aws-amplify')
 
-console.log(Amplify, API, graphqlOperation)
+// console.log(Amplify, API, graphqlOperation)
 
 const appConfig = {
     aws_appsync_graphqlEndpoint: "https://appsync.example.invalid/graphql",
