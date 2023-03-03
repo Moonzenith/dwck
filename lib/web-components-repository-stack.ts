@@ -8,7 +8,8 @@ export class WebComponentsRepositoryStack extends cdk.Stack {
     super(scope, id, props);
 
     const webapp = new WebAppConstruct(this, 'wc-repo-webapp')
-    webapp.addAssets('./web-components')
+    webapp
+      .addAssets('./web-components')
       
 
     // [ ] pipeline to deploy this web components
@@ -16,3 +17,5 @@ export class WebComponentsRepositoryStack extends cdk.Stack {
 
   }
 }
+
+
