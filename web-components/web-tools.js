@@ -20,8 +20,8 @@ const toArray = Array.from
 const { log, error, warn } = console
 
 // const baseUrl = 'https://cdn.example.invalid/'
-const baseUrl = 'https://cdn.example.invalid'
-// const baseUrl = './'
+// const baseUrl = 'https://cdn.example.invalid'
+const baseUrl = './'
 
 // document.createElement('button').
 function html(templates, ...values) {
@@ -112,16 +112,14 @@ function getMyLocation() {
         .filter(trace => urlRegex.test(trace))
         .map(trace => trace.match(urlRegex).pop().replace(/:\d+:\d+/gi, '').replace(/[()]/gi, ''))
 
-    log(traces)
     const currentLocation = traces.pop()
 
-    log(currentLocation)
     try {
         currentUrl = new URL(currentLocation)
     } catch (err) { log('pillao 1', err) }
 
     // const sourceLocationRaw = traces[0]
-    const sourceLocation = traces.unshift()
+    const sourceLocation = traces.shift()
 
     let sourceUrl
     try {
