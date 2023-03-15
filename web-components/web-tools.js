@@ -19,9 +19,28 @@ const eventNames = [
 const toArray = Array.from
 const { log, error, warn } = console
 
-// const baseUrl = 'https://cdn.example.invalid/'
-// const baseUrl = 'https://cdn.example.invalid'
-const baseUrl = './'
+const baseUrl = 'https://cdn.example.invalid'
+// const baseUrl = './'
+
+
+/**
+ * Creates idle time for a given period of time (in millisecotds).
+ * Return a promise, use .then() or use async await
+ * 
+ * @example
+ * async funtion run() {
+ *      console.log('starting function')
+ *      await sleep()
+ *      console.log('this will print after default time')
+ * }
+ *
+ * @param {number} [time=300]
+ * @returns {Promise}
+ */
+function sleep(time = 300) {
+    return new Promise(resolve => setTimeout(resolve, time))
+}
+
 
 // document.createElement('button').
 function html(templates, ...values) {
@@ -43,6 +62,7 @@ function html(templates, ...values) {
 }
 
 html.import = async (htmlUrl) => {
+    console.trace()
     const headers = {}
     console.log('headers', headers)
     const res = await (await fetch(htmlUrl, { headers })).text()
@@ -133,12 +153,12 @@ function getMyLocation() {
 const module = {
     set exports(mod) {
         const { currentUrl } = getMyLocation()
-        console.log('sourceUrl', currentUrl.toString())
+        // console.log('sourceUrl', currentUrl.toString())
         const pkgName = currentUrl.toString()
         if (!window.modules) {
             window.modules = {}
         }
-        console.log('setting module', pkgName, mod)
+        // console.log('setting module', pkgName, mod)
         window.modules[pkgName] = mod
     }
 }
