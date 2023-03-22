@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <!-- https://cdn.example.invalid -->
+
+    <link rel="stylesheet" href="https://cdn.example.invalid/style-tools.css">
+    <link rel="stylesheet" href="https://cdn.example.invalid/css-tools.css">
+
+
+    <script src="https://cdn.example.invalid/package-bundle.js"></script>
+
+
+    <style>
+        a {
+            color: #e0b76a;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .top-menu a {
+            min-width: 120px;
+            /* height: 80%; */
+            padding: 4px;
+            margin-right: 2px;
+            border-radius: 2px;
+            border-bottom: 1px solid var(--black-3);
+
+            text-decoration: none;
+            font-size: 14px;
+
+            color: var(--white-3);
+            background-color: var(--black-2);
+        }
+
+        pre {
+            display: block;
+            background-color: var(--black-1);
+            color: ghostwhite;
+            font-family: monospace;
+            margin: 12px 0;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <app-layout>
+
+        <section slot="main-content">
+            <h1>asdasdasdasdasdasdasd</h1>
+            <flip-card trigger="app-modal" trigger-event="declined">
+                <h1 slot="front">Carras</h1>
+                <section slot="back">
+                    <ul>
+                        <li>cualquier maricada</li>
+                    </ul>
+
+                    <button id="touch-me">touch me!</button>
+                </section>
+            </flip-card>
+
+            <app-modal trigger="#touch-me">
+                <section slot="main">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium, sequi? Amet dignissimos
+                        eligendi quisquam ullam accusantium, molestiae asperiores sequi repellendus ab, nostrum aperiam
+                        laborum, provident distinctio nulla qui consequatur incidunt!</p>
+                </section>
+            </app-modal>
+
+
+            <flip-card trigger="app-modal" trigger-event="accepted">
+                <h1 slot="front">Carras</h1>
+                <section slot="back">
+                    <ul>
+                        <li>cualquier maricada</li>
+                    </ul>
+                </section>
+            </flip-card>
+        </section>
+    </app-layout>
+
+
+
+
+
+
+    <script src="https://cdn.example.invalid/web-tools.js"></script>
+    <script src="https://cdn.example.invalid/tube-layout/tube-layout.component.js"></script>
+    <script src="https://cdn.example.invalid/layout/components/layout.component.js"></script>
+
+    <script src="https://cdn.example.invalid/accordion/accordion.component.js"></script>
+    <script src="https://cdn.example.invalid/modal/components/modal.component.js"></script>
+    <script src="https://cdn.example.invalid/chart/data-set.component.js"></script>
+    <script src="https://cdn.example.invalid/chart/data-point.component.js"></script>
+    <script src="https://cdn.example.invalid/chart/data-chart.component.js"></script>
+    <script src="https://cdn.example.invalid/flip-card/components/wc-flip-card.component.js"></script>
+    <script src="https://cdn.example.invalid/graph/graph-viewer.component.js"></script>
+
+    <script src="https://cdn.example.invalid/floating-pannel/floating-pannel.js"></script>
+    <script src="https://cdn.example.invalid/router/route.component.js"></script>
+    <script src="https://cdn.example.invalid/router/router.component.js"></script>
+    <script src="https://cdn.example.invalid/scripts/web-worker.component.js"></script>
+    <script src="https://cdn.example.invalid/scripts/service-worker.component.js"></script>
+    <script src="https://cdn.example.invalid/todo/todo.component.js"></script>
+    <script src="https://cdn.example.invalid/todo/task.component.js"></script>
+    <script src="https://cdn.example.invalid/auth/login.component.js"></script>
+    <script src="https://cdn.example.invalid/appsync/appsync.component.js"></script>
+    <script src="https://cdn.example.invalid/appsync/appsync-subscription.component.js"></script>
+    <script src="https://cdn.example.invalid/appsync/appsync-mutation.component.js"></script>
+    <script src="https://cdn.example.invalid/green-screen/green-screen.component.js"></script>
+
+    <script src="https://cdn.example.invalid/cards/plain-card.component.js"></script>
+
+
+
+</body>
+
+</html>
