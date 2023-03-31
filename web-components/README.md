@@ -1,10 +1,19 @@
 
+# dWCk
 
+## TODO
+
+- [ ] Update this
+- [ ] Move the relevant tests html files to the assets/html
+- [ ] Add npm option / wepack hack to serve the test asesets
+- [ ] Delete all the non-standard folders from the root of the project on the development branch
 
 ## UI Components
+
 Simple to use leaf components, use this as basic building blocks for your application.
+
 - [accordion](./accordion/README.md)
-- [flip-card](./flip-card/README.md) 
+- [flip-card](./flip-card/README.md)
 - [modal](./modal/README.md)
 - [plain-card](./cards/README.md)
 - [flip-card](./path-to-component/README.md)
@@ -13,21 +22,21 @@ Simple to use leaf components, use this as basic building blocks for your applic
 - [flip-card](./path-to-component/README.md)
 
 ## Layout Components
+
 - [app-layout](./layout/README.md)
 - [video-layout](./tube-layout//README.md)
 - [app-layout](./layout/README.md)
 
-
 ## Data & Chart Components
+
 - []()
 
 ## Script Components
 - [web-worker]()
 - [service-worker]()
 
-
-
 ## Import lib
+
 ```html
     <link rel="stylesheet" href="https://cdn.example.invalid/style-tools.css">
     <link rel="stylesheet" href="https://cdn.example.invalid/css-tools.css">
@@ -38,7 +47,7 @@ Simple to use leaf components, use this as basic building blocks for your applic
     <script src="https://cdn.example.invalid/web-tools.js"></script>
     <script src="https://cdn.example.invalid/tube-layout/tube-layout.component.js"></script>
     <script src="https://cdn.example.invalid/layout/components/layout.component.js"></script>
-    
+
     <script src="https://cdn.example.invalid/accordion/accordion.component.js"></script>
     <script src="https://cdn.example.invalid/modal/components/modal.component.js"></script>
     <script src="https://cdn.example.invalid/chart/data-set.component.js"></script>
@@ -46,7 +55,7 @@ Simple to use leaf components, use this as basic building blocks for your applic
     <script src="https://cdn.example.invalid/chart/data-chart.component.js"></script>
     <script src="https://cdn.example.invalid/flip-card/components/wc-flip-card.component.js"></script>
     <script src="https://cdn.example.invalid/graph/graph-viewer.component.js"></script>
-    
+
     <script src="https://cdn.example.invalid/floating-pannel/floating-pannel.js"></script>
     <script src="https://cdn.example.invalid/router/route.component.js"></script>
     <script src="https://cdn.example.invalid/router/router.component.js"></script>
@@ -59,6 +68,6 @@ Simple to use leaf components, use this as basic building blocks for your applic
     <script src="https://cdn.example.invalid/appsync/appsync-subscription.component.js"></script>
     <script src="https://cdn.example.invalid/appsync/appsync-mutation.component.js"></script>
     <script src="https://cdn.example.invalid/green-screen/green-screen.component.js"></script>
-    
+
     <script src="https://cdn.example.invalid/cards/plain-card.component.js"></script>
 ```
