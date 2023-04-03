@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Documentos</title>
 </head>
 
 <body>
@@ -14,297 +14,401 @@
       display: none;
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      height: 100%;
-
+    .disable {
+      filter: contrast(60%)grayscale(40%);
     }
   </style>
 
+  <script id="transforms-and-filters">
+    const filters = Object.freeze({
+      test(event, param) {
+        console.log(event, param)
+        return event.detail
+      },
+      hasSessionToken(event) {
+        console.clear()
+        console.log('on hasSessionToken', event)
+        return true
+      }
 
-    <button >click me</button>
+    })
 
-    <event-source trigger="button" data-test="true" />
-
-    <app-modal trigger="event-source" event="data" ></app-modal>
-
-    <nav slot="top-menu" class="flex-row justify-content-around">
-      <a href="#">Home</a>
-      <a href="#event">event</a>
-      <a href="#rooms">rooms</a>
-      <a href="#page3">page3</a>
-    </nav>
-
-      function isEmpty() {
+    // localhost:8080/#admin?token=asdasd
+    const transforms = Object.freeze({
+      count(data, direction = 1) {
+        console.log(data, direction)
+        const { id, name, count } = data
+        return { id, name, count: Date.now() % 100 }
+        // return { id, name, count: Number(count) + Number(direction) }
+      },
+      getTokenFromUrl(event) {
+        console.log('on getTokenFromUrl', event)
+        alert('test')
+        const [hash, query] = window.location.hash.split('?')
+        if(!query) return null
+        const search = new URLSearchParams(query)
+        return search.get('token')
 
       }
-    </script>
-
-
-      </app-route>
-
-      <app-route hash="event">
-        <h1>page 1</h1>
-
-        <p>the idea is, if I send this modal to take the data from the form or div</p>
-
-        <form id="user-form">
-          <label for="">Name</label><input id="new-user-name-input" name="name" type="text">
-          <br>
-          <label for="">Alias</label><input id="new-user-alias-input" name="alias" type="text">
-        </form>
-
-
-        <event-group>
-          <event-source id="user-creation-started" data-target="#user-intro" trigger="#create-user-test-btn"
-            trigger-event="click" transform="#get-user-from-form" />
-        </event-group>
-
-        <button id="create-user-test-btn">create</button>
-
-
-        <app-modal trigger="#update-modal-info" trigger-event="done">
-          <section id="user-intro" slot="main">
-            <p>wecome <span data-key="name"></span> with email <span data-key="alias"></span>@amazon.com </p>
-          </section>
-        </app-modal>
-
-        <js-fn id="update-target-info" trigger="#user-creation-started" trigger-event="data">
-          function (event) {
-          console.log(event)
-          const targetSelector = event.target.dataset.target
-          console.log('targetSelector', targetSelector)
-
-          const target = document.querySelector(targetSelector)
-          const data = event.detail
-          Object.keys(data).forEach(key => {
-          console.log('key:', key, data[key])
-          target.querySelector(`[data-key="${key}"]`).textContent = data[key]
-          })
-          }
-        </js-fn>
-
-        <js-fn id="get-user-from-form">
-          function (event) {
-          console.log('event', event)
-          const input = document.querySelector('#new-user-name-input')
-          const fields = Array.from(document.querySelectorAll('#user-form [name]'))
-          const data = {}
-          fields.forEach(field => {
-          data[field.name] = field.value
-          })
-          return data
-          }
-        </js-fn>
-
-        <script>
-
-        </script>
-
-      </app-route>
-
-      <app-route hash="rooms">
-        <h1>rooms</h1>
-        <!-- 
-        <section>
-
-          <flip-card>
-            <section slot="front">
-              <h1>Room ({roomId})</h1>
-              <a href="">chime link</a>
-            </section>
-          </flip-card>
-
-          <flip-card>
-            <section slot="front">
-              <h1>Room ({roomId})</h1>
-              <a href="">chime link</a>
-            </section>
-          </flip-card>
-
-          <flip-card>
-            <section slot="front">
-              <h1>Room ({roomId})</h1>
-              <a href="">chime link</a>
-            </section>
-          </flip-card>
-        </section> -->
-
-        <template id="flip-card-template">
-          <flip-card disabled>
-            <section slot="front">
-              <h1>Room <span data-room-id></span></h1>
-              <a href="" target="_blank">chime link</a>
-            </section>
-          </flip-card>
-        </template>
-
-      </app-route>
-
-      <app-route hash="page3">
-
-        <plain-card>
-          <h1 slot="title">page 3</h1>
-
-          <p slot="main">the idea is, if I send this modal to take the data from the form or div</p>
-
-        </plain-card>
+    })
+  </script>
 
 
 
-        <form id="user-form">
-          <label for="">Name</label><input type="text">
-          <br>
-          <label for="">Alias</label><input type="text">
-        </form>
-
-
-
-      </app-route>
-
-    </app-router>
-
-  </app-layout>
-
-  <app-modal id="auth-modal" trigger="#open-login-btn">
-    <h1 slot="title">Authenticate</h1>
-    <section slot="main">
-      <label for="auth-alias-input">Alias</label>
-      <input type="text" name="" id="auth-alias-input">
-    </section>
-  </app-modal>
-
-  <!-- test 2 -->
-
-
-
-  <!-- EVENT MANAGEMENT -->
-
-  <data-store id="user-store">
-    <data-query id="guest-login" data-log key="guest-session" type="get" trigger="#window-loaded"
-      trigger-event="data" />
-    <data-query id="delete-guest-session" data-log key="guest-session" type="delete" trigger="#logout-btn" />
-
-    <data-query id="get-user-session" data-log key="user-session" type="get" />
-    <data-query id="delete-user-session" data-log key="user-session" type="delete" trigger="#logout-btn" />
-
-    <data-set id="guest-session" visible trigger="#not-logged-in-guest" trigger-event="data"></data-set>
-    <data-set id="user-session" visible trigger="#user-auth-request" trigger-event="data"></data-set>
-
-    <data-query id="delete-user-session" key="user-session" type="delete" trigger="#logout-modal"
-      trigger-event="accepted" />
+  <!-- Session management -->
+  <!-- <event-source id="" trigger="window" event="load" filter="hasSessionToken"  /> -->
+  
+  <app-modal trigger="#get-token-from-url" event="loaded"></app-modal>
+  <event-source id="get-token-from-url" trigger="window" event="load" transform="getTokenFromUrl"/>
+  
+  <data-store id="user-session">
+    <data-set id="browser-token" visible></data-set>
+    <data-set id="user-token" trigger="#get-token-from-url" event="data"></data-set>
   </data-store>
+  
+  <!-- /Session management -->
+
+  <app-router>
+
+    <app-route>
+      <h1>hi</h1>
+      <nav>
+        <a href="#rooms">rooms</a>
+        <a href="#admin">admin</a>
+        <a href="#login">login</a>
+      </nav>
+    </app-route>
+
+    <!-- <app-route></app-route> -->
+    <app-route hash="login">
+      <nav>
+        <a href="#rooms">rooms</a>
+        <a href="#admin">admin</a>
+        <a href="#login">login</a>
+      </nav>
+      <hr>
+      <app-modal id="login-modal" open>
+        <section slot="main">
+          <form>
+            <label for="">Alias: </label><input type="text" name="alias">
+          </form>
+        </section>
+      </app-modal>
+
+      <style>
+        flip-card {
+          width: 200px;
+          height: 300px;
+        }
+      </style>
+
+      <!-- <deck-reader>
+        <flip-card>
+          <h1 slot="front">front 1</h1>
+        </flip-card>
+        <flip-card>
+          <h1 slot="front">front 2</h1>
+        </flip-card>
+        <flip-card>
+          <h1 slot="front">front 3</h1>
+        </flip-card>
+        <flip-card>
+          <h1 slot="front">front 4</h1>
+        </flip-card>
+      </deck-reader> -->
+
+    </app-route>
+
+    <!-- <app-route></app-route> -->
+    <app-route hash="rooms">
+
+      <h1>rooms</h1>
+      <nav>
+        <a href="#rooms">rooms</a>
+        <a href="#admin">admin</a>
+        <a href="#login">login</a>
+      </nav>
+
+      <hr>
+      <style>
+        /* .grid {
+          display: grid;
+          grid-template-columns: 50% 50%;
+          grid-template-rows: 50% 50%;
+          gap: 40px;
+        } */
+      </style>
+
+      <section class="disable flex-column">
+        <plain-card style="width: 90vh;">
+          <h1 slot="title">Main Room <span data-key="id" data-attribute="textContent"></span></h1>
+          <section slot="main" style="text-align: center;">
+            <small>this room is visible to everybody and it will be the starting point of the conversation</small>
+            <br>
+            <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+          </section>
+        </plain-card>
+      </section>
 
 
-  <event-stream>
-
-    <event-group id="user-auth-request">
-      <event-source trigger="#auth-modal" trigger-event="accepted" transform="#get-alias" />
-    </event-group>
-
-    <event-group id="only-for-auth-users">
-      <event-source trigger="#get-user-session" trigger-event="get" filter="#is-auth" />
-    </event-group>
-
-    <event-group id="decide-how-login">
-
-      <!-- if not logged in as guest -->
-      <event-source id="not-logged-in-guest" trigger="#guest-login" trigger-event="get" filter="#is-empty"
-        transform="#generate-guest-id" />
-
-      <!-- if logged in as guest -->
-      <event-source id="logged-in-guest" trigger="#guest-login" trigger-event="get" filter="#not-empty" />
-
-      <!-- if not logged in as user -->
-      <event-source id="not-logged-in-user" trigger="#user-login" trigger-event="get" filter="#is-empty" />
-
-      <!-- if logged in as user -->
-      <event-source id="logged-in-user" trigger="#user-login" trigger-event="get" filter="#not-empty" />
-
-    </event-group>
-
-    <event-group id="guest-logged-in">
-      <event-source trigger="#guest-session" trigger-event="updated" />
-      <event-source trigger="#logged-in-guest" trigger-event="data" />
-    </event-group>
+      <ui-data-repeat class="grid" id="ui-rooms-list" trigger="#event-info-changed" event="data">
+        <template>
+          <plain-card>
+            <h1 slot="title"><span name="name"></span></h1>
+            <section slot="main">
+              <b>hosted by:</b><span name="alias"></span>
+              <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+            </section>
+          </plain-card>
+        </template>
+      </ui-data-repeat>
 
 
-    <event-group id="log-out">
-      <event-source />
-    </event-group>
+      <!-- <section class="grid">
 
-    <event-source id="window-loaded" trigger="window" trigger-event="load" />
+        <flip-card>
+          <section slot="front">
+            <h1>Room <span data-key="id" data-attribute="textContent"></span></h1>
+            <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+          </section>
+        </flip-card>
 
-    <event-source id="add-room" data-log trigger="#add-room-btn" trigger-event="click" transform="#add-room-ui-item" />
+        <flip-card disabled>
+          <section slot="front">
+            <h1>Room <span data-key="id" data-attribute="textContent"></span></h1>
+            <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+          </section>
+        </flip-card>
 
-  </event-stream>
+        <flip-card disabled>
+          <section slot="front">
+            <h1>Room <span data-key="id" data-attribute="textContent"></span></h1>
+            <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+          </section>
+        </flip-card>
+
+        <flip-card>
+          <section slot="front">
+            <h1>Room <span data-key="id" data-attribute="textContent"></span></h1>
+            <a data-key="url" data-attribute="href" href="" target="_blank">chime link</a>
+          </section>
+        </flip-card>
+
+      </section> -->
+      <!-- <app-accordion>
+        <section>
+          <h1>Main room</h1>
+          <p>This will be the room for the main presentation before going to breakout sessions.</p>
+        </section>
+      </app-accordion>
+
+      <app-accordion>
+        <section>
+          <h1>Room 12</h1>
+          <p>This room has been designated for me by a random hash.</p>
+        </section>
+      </app-accordion> -->
+
+    </app-route>
+
+    <!-- <app-route></app-route> -->
+    <app-route hash="admin">
+
+      <app-layout>
+
+        <h1 style="font-size:18px;" slot="header">admin</h1>
+        <nav slot="top-menu">
+
+          <a href="#rooms">rooms</a>
+          <a href="#admin">admin</a>
+          <a href="#login">login</a>
+
+        </nav>
+        <h2 style="font-size:18px;" slot="left-header">Events</h2>
+        <section slot="left-content">
+
+          <app-accordion>
+
+            <section>
+
+              <h1>CDK Event</h1>
+              <p>This will be the room for the main presentation before going to breakout sessions.</p>
+
+            </section>
+            <section>
+
+              <h1>Other</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repellendus asperiores quas recusandae
+                doloribus non qui libero. Unde autem iure velit voluptates alias tenetur temporibus, asperiores fugit
+                quis assumenda praesentium!</p>
+
+            </section>
+          </app-accordion>
+
+          <hr>
+
+          <app-accordion>
+            <section>
+              <h1>other info</h1>
+              <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae, cum! Dolores quia repudiandae
+                autem, error voluptatem similique odit animi laudantium sunt. Ducimus eum earum labore? Odio quod
+                reiciendis fugit quaerat adipisci ullam asperiores reprehenderit, minus unde sed quos harum tenetur ipsa
+                ipsum aliquid molestias impedit eos necessitatibus atque. Nemo velit tempora voluptate eum commodi odio
+                perferendis quasi numquam ex odit? Sint nemo fugiat similique dignissimos voluptatibus commodi iure
+                nulla corrupti blanditiis? Iusto ratione voluptates commodi quisquam quaerat nostrum eveniet earum
+                beatae qui eligendi laborum fugit officia rerum nemo distinctio nesciunt harum, dignissimos suscipit
+                consequuntur amet consequatur accusantium. Doloremque, magnam possimus?</p>
+            </section>
+
+            <section>
+              <h1>Other</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repellendus asperiores quas recusandae
+                doloribus non qui libero. Unde autem iure velit voluptates alias tenetur temporibus, asperiores fugit
+                quis assumenda praesentium!</p>
+            </section>
+
+            <section>
+              <h1>Other</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repellendus asperiores quas recusandae
+                doloribus non qui libero. Unde autem iure velit voluptates alias tenetur temporibus, asperiores fugit
+                quis
+                assumenda praesentium!</p>
+            </section>
+
+            <section>
+              <h1>Other</h1>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos repellendus asperiores quas recusandae
+                doloribus non qui libero. Unde autem iure velit voluptates alias tenetur temporibus, asperiores fugit
+                quis
+                assumenda praesentium!</p>
+            </section>
+          </app-accordion>
+        </section>
+
+        <section class="flex-column" slot="main">
+
+          <article>
+            <p slot="title">TODO</p>
+            <div slot="main">
+              <input type="checkbox" name="" id=""><label>create event if none present</label><br>
+              <input type="checkbox" name="" id=""><label>dysplay basic event info</label><br>
+              <input type="checkbox" name="" id=""><label>add rooms</label><br>
+            </div>
+
+          </article>
+
+          <article id="room table">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>url</th>
+                  <th>host</th>
+                  <th>date</th>
+                </tr>
+              </thead>
+
+            </table>
+
+            <hr>
+
+            <ui-data-sync trigger="#event-info-changed" event="data">
+              <div>
+                <span name="name"><i>Room Name</i></span>
+                <span name="url" data-attribute="href"><a href="https://chime.aws/1234">URL</a></span>
+                <span name="host"><i>Host Alias</i></span>
+                <span name="facilitator"><i>Facilitator Alias</i></span>
+                <span name="date"><i>Date and Time of the event</i></span>
+              </div>
+            </ui-data-sync>
+
+            <br>
+            <hr>
+            <br>
+            <hr>
+            <br>
+
+            <ui-data-repeat id="ui-rooms-list" trigger="#event-info-changed" event="data">
+              <template>
+                <div>
+                  <span name="name">Main Room</span>
+                  <span name="url" data-attribute="href"><a href="https://chime.aws/1234">URL</a></span>
+                  <span name="host">Chandra Reddy</span>
+                  <span name="date">April 20 - 2023 at 3:00 pm</span>
+                  <button name="edit">✏️</button>
+                  <button name="delete">🗑️</button>
+                </div>
+              </template>
+            </ui-data-repeat>
 
 
-  <app-modal id="logout-modal" trigger="#only-for-auth-users" trigger-event="data">
-    <h2 slot="main">logging out</h2>
-  </app-modal>
+            <app-modal id="confirm-delete-room-modal" trigger="#ui-rooms-list" event="delete">
+              <h1 slot="title">You are about to delete this room</h1>
+              <p slot="main">Room <b data-key="name"></b> will be deleted.</p>
+            </app-modal>
 
-  <!-- <js-fn ></js-fn> -->
+            <br>
+            <hr>
+            <br>
 
-  <button id="add-room-btn" data-id="roomX" data-url="https://chime.aws/roomX">add room</button>
+            <button id="add-room-btn">add room</button>
 
-  <!-- <app-modal trigger="#add-room" trigger-event="data"  ></app-modal> -->
-
-  <js-fn id="add-room-ui-item">
-    function (item) {
-    if(!item) return
-    const flipCardTemplate = document.querySelector('#flip-card-template')
-    const container = flipCardTemplate.parentElement
-    const copy = flipCardTemplate.content.cloneNode(true)
-    copy.querySelector('a').href = item.url
-    copy.querySelector('[data-room-id]').textContent = item.id
-    container.appendChild(copy)
-    }
-  </js-fn>
-
-  <js-fn id="not-empty">
-    function (event) {
-    return !!event.detail
-    }
-  </js-fn>
+            <event-group id="open-event-modal">
+              <event-source trigger="#add-room-btn" action="click" />
+              <event-source trigger="#ui-rooms-list" event="edit" />
+            </event-group>
 
 
-  <js-fn id="is-empty">
-    function (event) {
-    return !event.detail
-    }
-  </js-fn>
+            <app-modal id="new-room-modal" trigger="#open-event-modal" event="data">
+              <!-- <app-modal id="new-room-modal" trigger="#on-load-event" action="loaded"> -->
 
-  <js-fn id="log-fn" trigger="[data-log]" trigger-event="get">
-    function (event) {
-    console.log(event)
-    console.log(event.detail)
-    }
-  </js-fn>
+              <form slot="main">
+                <label for="">Room Name</label><input type="text" name="name"><br>
+                <label for="">Room url</label><input type="text" name="url"><br>
+                <label for="">Host</label><input type="text" name="host"><br>
+                <label for="">Facilitator</label><input type="text" name="alias"><br>
+                <label for="">date</label><input type="date" name="date"><br>
+              </form>
+            </app-modal>
 
-  <js-fn id="generate-guest-id">
-    function (event) {
-    const now = Date.now()
-    return {guestId: `guest:${now}`, room: now % 5 }
-    }
-  </js-fn>
+            <!-- <app-modal trigger="#on-load-event" event="loaded"></app-modal> -->
+            <!-- <app-modal trigger="#get-current-event" event="get"></app-modal> -->
 
-  <js-fn id="is-auth">
-    function (event) {
-    console.log(event.detail)
-    const isAllawed = event.detail && event.detail.alias
-    console.log(isAllawed)
-    return isAllawed
-    }
-  </js-fn>
+            <event-source id="on-load-event" trigger="window" event="load" />
 
-  <js-fn id="get-alias">
-    function () {
-    return { alias: document.querySelector('#auth-alias-input').value }
-    }
-  </js-fn>
+            <event-group id="event-info-changed">
+              <event-source trigger="#get-current-event" event="list" />
+              <event-source trigger="#room-list" event="updated" />
+
+            </event-group>
+
+            <hr>
+            <br>
+            <br>
+            <br>
+            <br>
+
+            <data-store id="room-store">
+              <data-set visible id="room-list" trigger="#new-room-modal" event="accepted" append visible>
+                <data-query id="delete-room-query" key="room-list" type="delete" trigger="#confirm-delete-room-modal"
+                  event="accepted"></data-query>
+                <data-query id="get-current-event" key="room-list" type="list" trigger="#on-load-event"
+                  event="loaded"></data-query>
+              </data-set>
+            </data-store>
+
+          </article>
+
+        </section>
+        <small slot="footer">Footer</small>
+      </app-layout>
+
+    </app-route>
+
+  </app-router>
+
 
 </body>
 
