@@ -5,34 +5,22 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>deck-reader</title>
+
 </head>
 
 <body>
-  <style>
-    .hidden {
-      display: none;
-    }
-  </style>
 
-  <script>
-    const filters = Object.freeze({
-      test(event, param) {
-        console.log(event, param)
-        return event.detail
-      },
+  <deck-reader>
 
-    })
+    <flip-card></flip-card>
+    <flip-card></flip-card>
+    <flip-card></flip-card>
+    <flip-card></flip-card>
+    <flip-card></flip-card>
+    <flip-card></flip-card>
 
-    const transforms = Object.freeze({
-      count(data, direction = 1) {
-        console.log(data, direction)
-        const { id, name, count } = data
-        return { id, name, count: Date.now() % 100 }
-        // return { id, name, count: Number(count) + Number(direction) }
-      },
-    })
-  </script>
+  </deck-reader>
 
 
   <app-router>
