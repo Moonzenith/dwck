@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    nav a {
+      color: var(--main-tone);
+      padding: 2px 4px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    app-router {
+      width: 100%;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <app-layout>
+
+    <header slot="header">Welcome to our memory flip game</header>
+    <b slot="left-header">Game stats</b>
+    <nav slot="top-menu" class="">
+      <a href="#">Home</a>
+      <a href="#game">Game</a>
+      <a href="#leaderboard">Leaderboard</a>
+    </nav>
+
+    <section slot="left-content">
+
+      <plain-card>
+        <h2 slot="title">My Score</h2>
+        <section slot="main">
+
+          <ui-data-sync trigger="#game-log" on="updated">
+            <section>
+              <b>Level:</b><span data-key="level"></span><br>
+              <b>Attempts:</b><span data-key="attempts"></span><br>
+              <b>Username:</b><span data-key="username"></span><br>
+            </section>
+          </ui-data-sync>
+        </section>
+      </plain-card>
+
+      <app-accordion>
+        <section>
+          <h5>Game instructions</h5>
+          <p>This is a memory game, where you have to find pairs in a set of cards.</p>
+          <p>You will have X minutes to solve multiple challenges and the score will be based on how far you get.</p>
+        </section>
+        <section>
+          <h5>FAQs</h5>
+          <b>Question 1:</b>
+          <p>answer 1</p>
+          <hr>
+          <b>Question 2:</b>
+          <p>answer 2</p>
+          <hr>
+        </section>
+      </app-accordion>
+    </section>
+
+    <app-router slot="main">
+
+      <app-modal id="username-selection-modal" trigger="#game-route" on="activated">
+        <h1 slot="title">Start new match</h1>
+        <section slot="main">
+          <p>Ready to start a new match?</p>
+          <p>choose a username and let's play</p>
+          <form>
+            <label>Username:</label><input type="text" name="username">
+          </form>
+        </section>
+      </app-modal>
+
+      <script>
+        document
+          .querySelector('app-router')
+          .addEventListener('navigated', event =>
+            console.log(`navigated to ${event.detail.hash || 'home'}`))
+      </script>
+
+      <app-route>
+        <h1>I'm Home</h1>
+      </app-route>
+
+      <app-route id="game-route" hash="game">
+
+        <h1>I'm Game</h1>
+        <ui-data-sync trigger="#username-selection-modal" on="accepted">
+          <p>Welcome <span data-key="username"></span></p>
+        </ui-data-sync>
+
+        <button id="change-level-btn">change level</button>
+
+        <app-modal id="change-level-modal" trigger="#change-level-btn" on="click">
+          <form slot="main">
+            <input type="number" name="level">
+          </form>
+
+        </app-modal>
+
+        <!-- <select name="level" id="select-level">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+        </select> -->
+
+        <data-store id="game-store">
+          <data-set id="current-level" trigger="#change-level-modal" on="accepted" visible>
+            <data-query id="get-current-level" key="current-level" type="get"  trigger="#load-current-level" on="click" ></data-query>
+          </data-set>
+        </data-store>
+
+
+        <button id="load-current-level">load</button>
+
+        
+
+        <ui-data-sync trigger="#get-current-level" on="get">
+          <section>
+            <memory-flip-board id="game-board" username="demo-user" data-key="level" data-attribute="level" level="2"
+              time="30s" preview></memory-flip-board>
+          </section>
+        </ui-data-sync>
+
+        <!-- <memory-flip-board id="game-board" username="demo-user" level="2" time="30s" preview></memory-flip-board> -->
+
+
+
+        <!-- <event-source id="scores" trigger="#game-board" on="levelup"></event-source> -->
+        <data-set id="game-log" visible trigger="#game-board" on="levelup"></data-set>
+
+        <app-modal trigger="#game-board" on="levelup">
+          <ui-data-sync slot="title" trigger="#scores" on="data">
+            <h1>You did it <span name="username"></span>!!</h1>
+          </ui-data-sync>
+          <ui-data-sync slot="main" trigger="#scores" on="data">
+            <section>
+              <b>Level:</b><span data-key="level"></span><br>
+              <b>Attempts:</b><span data-key="attempts"></span><br>
+            </section>
+          </ui-data-sync>
+        </app-modal>
+
+      </app-route>
+
+      <app-route hash="leaderboard">
+        <h1>I'm Leaderboard</h1>
+      </app-route>
+
+    </app-router>
+
+    <footer slot="footer">Thank you.</footer>
+
+  </app-layout>
+
+</body>
+
+</html>
