@@ -1,5 +1,1 @@
-import FlipCard from "./src/flip-card";
-
-customElements.define('flip-card', FlipCard);
-
-export default FlipCard;
+export * from "./src/flip-card"

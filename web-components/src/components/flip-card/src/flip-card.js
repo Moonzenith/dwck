@@ -72,3 +72,7 @@ export default class FlipCard extends HTMLElement {
     }
   }
 }
+
+
+
+customElements.define('flip-card', FlipCard);
