@@ -12,7 +12,7 @@
     "docs": "jsdoc -c jsdoc.json"
   },
   "author": "Diego Torres",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.245.0",
     "ace-builds": "^1.17.0",
