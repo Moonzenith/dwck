@@ -28,8 +28,8 @@ import ModalCss from './app-modal.css'
  * 
  * @fires ModalComponent#accepted
  * @fires ModalComponent#declined
- * @author Diego Torres <demo@example.com>
- * @author Marco del Boccio <demo@example.com>
+ * @author Diego Torres
+ * @author Marco del Boccio
  * 
  *
  * @class ModalComponent

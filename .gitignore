@@ -10,3 +10,35 @@ node_modules/*
 cdk.out
 
 web-components/tube-layout/assets/*
+
+# Local configuration and credentials (commit only synthetic examples).
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+id_rsa
+id_ed25519
+
+# Generated files and local editor/runtime state.
+*.log
+.DS_Store
+*.bkp
+**/dist/
+coverage/
+.local-review/
+**/.obsidian/workspace.json
+**/.unotes/unotes_meta.json
+/bin/**/*.js
+/lib/**/*.js
+/test/**/*.js
+/web-components/assets/lib/*.js
+
+# Legacy deployment output; regenerate only in a separately configured AWS account.
+/web-cdn.json
+/dt-cdk-lib.json
+
+# Unrelated proprietary binaries and font archives.
+libwidevinecdm.so*
+amazon-ember-cufonfonts.zip

@@ -10,7 +10,7 @@ Before we begin, in this lesson we want to understand how to get data from a com
 
 1. The ideal mechanism to pass data to a component is by using `attributes`, in this case we are constricted to a simple values (no complex json objects the way you migth do it when using a framework)
    ```html
-    <user-card username="Example User" alias="demo-user" photo="https://path-to.photo"></user-card>
+    <user-card username="Example User" alias="demo-user" photo="https://example.com/avatar.svg"></user-card>
    ```
 2. If complex data must be passsed, we can also leverage the hability to pass html to a component.
    ```html
@@ -47,14 +47,15 @@ Before we begin, in this lesson we want to understand how to get data from a com
     
    ``` 
 
-   ![btn-dataset](../assets/../../assets/btn-dataset.png)
+   With the button selected in DevTools, `$0.dataset` contains the fictional
+   sample values `name: "example"` and `last: "user"`.
 
 
 ---
 
 
 ## Activity 1.1.1: Add a flip card
-Create a simple `flip-card` in your [index.html](../index.html) by adding the following line to the `<body>` section:
+Create a simple `flip-card` in your [index.html](./result/index.html) by adding the following line to the `<body>` section:
 ```html
 <flip-card style="width: 500px;"></flip-card>
 ```

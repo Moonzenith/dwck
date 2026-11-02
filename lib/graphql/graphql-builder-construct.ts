@@ -153,7 +153,7 @@ export class GraphQLConstruct extends Construct {
 
   /**
    * original location api-builder.ts
-   * @author Diego Torres <demo@example.com>
+   * @author Diego Torres
    * @version 1.0.0
    * @param {LambdaDef} LambdaDef 
    * @returns 

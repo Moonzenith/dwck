@@ -44,7 +44,7 @@ kanban-plugin: basic
 ## Archive
 
 - [x] adsasada
-- [x] list current components [Marco](mailto:demo@example.com)
+- [x] list current components Marco
 - [x] CardTemplate<br/><small>Area (@person)</small><br> - [ ] Task<br> - [ ] Task<br> - [ ] Task
 
 %% kanban:settings

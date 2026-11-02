@@ -4,3 +4,22 @@
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+
+# Keep local credentials, review notes and generated deployment output private.
+**/node_modules/
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.log
+*.bkp
+.DS_Store
+.local-review/
+**/.obsidian/
+**/.unotes/
+web-cdn.json
+dt-cdk-lib.json
+libwidevinecdm.so*
+amazon-ember-cufonfonts.zip

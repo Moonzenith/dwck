@@ -187,8 +187,8 @@ export default class DataStore extends HTMLElement {
     // return localforage.setItem(`${this.id}_${key}`, value)
     // if(!this.db) return console.warn('db not initialized')
     // this.db.table(tableName).add({
-    //   id: 'diego',
-    //   name: 'Diego Torres',
+    //   id: 'demo-user',
+    //   name: 'Example User',
     //   age: 30,
     // })
 

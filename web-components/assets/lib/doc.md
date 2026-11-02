@@ -1,8 +1,10 @@
-# Latest production build for easy access
+# Generated bundles
 
-## Tasks
+The stale checked-in bundle was removed because it included machine-specific
+build paths. Build the current source using the commands in
+[the component README](../../README.md); webpack writes the demo bundle to
+`web-components/dist/`.
 
-- [ ] Update this dist folder automatically with the latest production build of the `web-components` bundle (see `web-components/README.md` for more info)
-- [ ] Update the `web-components` README to point to this file for the latest production build
-- [ ] Add more info to this file about what the DWCK bundle is and how to use it
-- [ ] Add instructions for updating the bundle (erase the old one and copy the new one from the repo)
+A supported library distribution and a reproducible release process are still
+pending in [the roadmap](../../../ROADMAP.md). Do not commit generated bundles
+to this directory.

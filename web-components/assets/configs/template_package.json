@@ -11,7 +11,7 @@
     "watch": "webpack --mode development --watch"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {},
   "devDependencies": {
     "@webpack-cli/generators": "^3.0.1",
